@@ -1,10 +1,150 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>植物科普互動頁面</title>
+  <style>
+    body {
+      font-family: '微軟正黑體', sans-serif;
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background: #f0f8ff;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    button {
+      padding: 0.5rem 1.2rem;
+      font-size: 1rem;
+      cursor: pointer;
+      border: 2px solid #008080;
+      background: white;
+      color: #008080;
+      border-radius: 5px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    button.active,
+    button:hover {
+      background-color: #008080;
+      color: white;
+    }
+    .content {
+      min-height: 200px;
+      padding: 1rem;
+      border: 2px solid #008080;
+      border-radius: 8px;
+      background-color: #e0f7f7;
+      opacity: 1;
+      transition: opacity 0.5s ease-in-out;
+    }
+    .content.fade-out {
+      opacity: 0;
+    }
+    a{
+      color: #2980b9;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    a:visited {
+      color: #2980b9;
+    }
+  </style>
 </head>
 <body>
-$END$
+<div id="google-translate-box">
+  <div id="google_translate_element"></div>
+  <!-- Google Translate 的自動翻譯功能 -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'zh-TW',  // 頁面原語言
+        includedLanguages: 'en,es,fr,de,it,zh-CN,ja,ko,th,vi,my,id,ms,ar,he,ru,tg,uk,hi,tr,pt,nl,is,fi,sv,no,ro,kk,bo,mn,la,fil,tl,el',  // 支援的翻譯語言（可擴展）
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <p>點擊上方的語言選單以切換語言</p>
+</div>
+<h1>植物科普：木本與草本</h1>
+
+<div class="btn-group">
+  <button id="btn-woody" class="active">木本植物</button>
+  <button id="btn-herbaceous">草本植物</button>
+</div>
+
+<div id="content" class="content">
+  <h2>木本植物</h2>
+  <p>木本植物如樹木，有明顯的木質莖，莖部堅硬且具有年輪。這使得它們難以用手拔起，甚至需用斧頭多次砍伐才能砍斷。</p>
+  <p>即使是非常細的木本植物，其莖的纖維結構和硬度也遠高於一般草本植物。</p>
+</div>
+
+<script>
+  const btnWoody = document.getElementById('btn-woody');
+  const btnHerbaceous = document.getElementById('btn-herbaceous');
+  const content = document.getElementById('content');
+
+  const woodyContent = `
+      <h2>木本植物</h2>
+      <p>木本植物如樹木，有明顯的木質莖，莖部堅硬且具有年輪。這使得它們難以用手拔起，甚至需用斧頭多次砍伐才能砍斷。</p>
+      <p>即使是非常細的木本植物，其莖的纖維結構和硬度也遠高於一般草本植物。</p>
+    `;
+
+  const herbaceousContent = `
+      <h2>草本植物</h2>
+      <p>草本植物如香蕉，莖部沒有木質化，通常為多汁且較軟的組織。</p>
+      <p>這使得草本植物的莖能夠被輕易割斷或用手拔起，尤其在颱風後觀察時更能體會差異。</p>
+    `;
+
+  function switchContent(type) {
+    // 加淡出效果
+    content.classList.add('fade-out');
+
+    setTimeout(() => {
+      if(type === 'woody') {
+        content.innerHTML = woodyContent;
+        btnWoody.classList.add('active');
+        btnHerbaceous.classList.remove('active');
+      } else {
+        content.innerHTML = herbaceousContent;
+        btnHerbaceous.classList.add('active');
+        btnWoody.classList.remove('active');
+      }
+      // 淡入
+      content.classList.remove('fade-out');
+    }, 500);
+  }
+
+  btnWoody.addEventListener('click', () => switchContent('woody'));
+  btnHerbaceous.addEventListener('click', () => switchContent('herbaceous'));
+</script>
+<footer style="text-align: center; font-size: 50px">
+  作者：<a href="https://www.facebook.com/profile.php?id=100056441813114&locale=zh_TW" target="_blank">周彥廷</a>
+  <br>創作日期：西元二零二五年五月二十六日<br>
+  <img width="540" height="720" src="my_appearance2.jpg" alt="自拍">
+  <br>
+</footer>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous"
+        src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v17.0" nonce="yourNonce">
+</script>
+
+<div class="fb-comments"
+     data-href="https://chrischou19990904.github.io/harp_app_introduction"
+     data-width="100%"
+     data-numposts="5">
+</div>
 </body>
 </html>
